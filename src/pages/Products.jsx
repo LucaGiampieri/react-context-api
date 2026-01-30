@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
 import axios from "axios";
 import CardProduct from "../products/CardProduct";
-
+import { useBudgetMode } from "../contexts/BudgetContext";
 
 function Products() {
+
+    // usiamo il contesto, richiamando solo i valori che ci servono qui
+    const { budgetMode } = useBudgetMode();
 
     //creo una variabile in cui salvare l'API
     const enpoint = "https://fakestoreapi.com/products";
@@ -25,12 +28,22 @@ function Products() {
         <>
             <h1 className="product-title" >Products:</h1>
             <div className="card-container">
-                {productsList.map(product => (
-                    <CardProduct
-                        key={product.id}
-                        product={product}
-                    />
-                ))}
+                {budgetMode
+                    ? productsList
+                        .filter(product => product.price <= 30)
+                        .map(product => (
+                            <CardProduct
+                                key={product.id}
+                                product={product}
+                            />
+                        ))
+                    : productsList.map(product => (
+                        <CardProduct
+                            key={product.id}
+                            product={product}
+                        />
+                    ))
+                }
             </div>
         </>
     )
