@@ -14,10 +14,14 @@ import DefaultLayout from "./component/layots/DefaultLayout"
 //import pagina error
 import NotFound from "./pages/NotFound"
 
+//import Context Provider
+import { BudgetProvider } from "./contexts/BudgetContext"
+
 function App() {
 
   return (
-    <>
+
+    <BudgetProvider>
       <BrowserRouter>
         <Routes>
           <Route element={<DefaultLayout />} >
@@ -32,7 +36,8 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </BudgetProvider>
+
   )
 }
 
