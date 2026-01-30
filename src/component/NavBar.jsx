@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import { useBudgetMode } from "../contexts/BudgetContext"
 
 function NavBar() {
 
@@ -9,9 +10,19 @@ function NavBar() {
         { path: '/products', label: 'Lista prodotti' }
     ]
 
+    // usiamo il contesto, richiamando solo i valori che ci servono qui
+    const { budgetMode, buttonToggle } = useBudgetMode();
+
+
     return (
         <nav className="navbar">
             <h1 className="nav-title">E-commerce</h1>
+            <button
+                className="nav-budget-button"
+                onClick={buttonToggle}
+            >
+                {budgetMode ? "Disattiva Modalità Budget" : "Attiva Modalità Budget"}
+            </button>
             <ul className="nav-link-list">
                 {links.map((link, index) => (
                     <li key={index}>

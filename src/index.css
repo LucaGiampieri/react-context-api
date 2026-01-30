@@ -52,6 +52,15 @@ img {
   align-items: center;
 }
 
+.nav-budget-button {
+  background-color: bisque;
+  padding: 0.5rem 1rem;
+  color: brown;
+  border-radius: 10px;
+  border: 2px solid brown;
+  cursor: pointer;
+}
+
 .nav-link-list {
   display: flex;
   gap: 1rem;

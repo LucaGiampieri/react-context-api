@@ -2,26 +2,28 @@ import { createContext, useContext, useState } from "react";
 
 const BudgetContext = createContext();
 
-function BudgetProvider({ Children }) {
+function BudgetProvider({ children }) {
 
-    //creiamo una varibile in cui salvare la versione budget e che parta da falsa
     const [budgetMode, setBudgetMode] = useState(false);
 
-
-    return
-
-    <BudgetContext.Provider>
-        {Children}
-    </BudgetContext.Provider>
-
-    // Definiamo un hook per consumare il contesto
-    function useBudgetMode() {
-        const context = useContext(BudgetContext);
-        return context;
+    function buttonToggle() {
+        return budgetMode ? (setBudgetMode(false)) : (setBudgetMode(true))
     }
 
-
+    return (
+        <BudgetContext.Provider
+            value={{
+                budgetMode,
+                setBudgetMode,
+                buttonToggle
+            }}>
+            {children}
+        </BudgetContext.Provider>
+    );
 }
 
-// Esportiamo il nostro provider ed il nostro hook
-export { BudgetProvider, useBudgetMode }
+function useBudgetMode() {
+    return useContext(BudgetContext);
+}
+
+export { BudgetProvider, useBudgetMode };
